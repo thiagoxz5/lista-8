@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  FILE *relatorio;
+  int carros;
+  double ta=0;
+  
+  relatorio = fopen("resultado.txt","w");
+
+  printf("Digite o número total de carros da locadora: ");
+  scanf("%d", &carros);
+  double al[carros];
+  for (int i=0; i<carros; i++){
+    printf("Digite o valor do aluguel do %d carro: ", i + 1);
+    scanf("%lf", &al[i]);
+    ta += al[i];
+  }
+  
+  double totalc=carros;
+    
+  printf("\nO faturamento anual da locadora é R$ %.2lf\n", (((totalc/3)*ta)*12));
+  fprintf(relatorio,"o faturamento anual da locadora é R$ %.2lf\n", (((totalc/3)*ta)*12));
+
+  printf("\nO valor ganho com multas no mês é R$ %.2lf\n", (totalc/30)*(0.2*ta));
+  fprintf(relatorio,"O valor ganho com multas no mês é R$ %.2lf\n", (totalc/30)*(0.2*ta));
+  
+  printf("\nO valor gasto com a manutenção de veículos é R$ %.2lf\n", (0.02*totalc)*(600));
+  fprintf(relatorio, "O valor gasto com a manutenção de veículos é R$ %.2lf", (0.02*totalc)*(600));
+
+  fclose(relatorio);
+  }
